@@ -43,7 +43,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         dd("Cadastrando");
-        //dd($request);
     }
 
     /**
@@ -65,7 +64,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return "edit";
+        return view('admin.pages.products.edit', compact('id'));
     }
 
     /**
@@ -77,7 +76,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "update";
+        dd("editando o produto $id");
     }
 
     /**

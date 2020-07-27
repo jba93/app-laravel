@@ -1,14 +1,15 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Novo produto')
+@section('title', 'Editar produto')
 
 @section('content')
-    <h1>Cadastrar Novo Produto</h1>
+    <h1>Editar Produto {{$id}}</h1>
 
-    <form action="{{route('products.store')}}" method="POST">
+    <form action="{{route('products.update', $id)}}" method="POST">
         @csrf
+        @method("PUT")
         <input type="text" name="name" placeholder="Nome">
         <input type="text" name="description" placeholder="Descrição">
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Editar</button>
     </form>
 @endsection
