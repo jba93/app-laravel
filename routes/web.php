@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('products', 'ProductController');
+/*->middleware('auth');*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/login', function () {
+    return 'login';
+})->name('login');
+
+

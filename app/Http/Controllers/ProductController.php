@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return "index";
+        $products = ['TV', 'geladeira', 'sofá'];
+        return view('admin.pages.products.index', compact('products'));
     }
 
     /**
@@ -23,7 +31,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return "create";
+        return view('admin.pages.products.create');
     }
 
     /**
@@ -34,7 +42,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return "store";
+        dd("Cadastrando");
+        //dd($request);
     }
 
     /**
