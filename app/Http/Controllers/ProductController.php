@@ -48,15 +48,15 @@ class ProductController extends Controller
      */
     public function store(StoreUpdateProductRequest $request)
     {
-        $data = $request->only('name', 'description', 'price');
+        $data = $request->only('name', 'description', 'price');        
+
+        if($request->hasFile('image') && $request->image->isValid()){
+            $data['image'] = $request->image->store('products');             
+        }
+
         $this->product->create($data);
 
         return redirect()->route('products.index');
-
-        /*
-        if($request->file('photo')->isValid()){
-            dd($request->file('photo')->store('products'));
-        }*/
     }
 
     /**
