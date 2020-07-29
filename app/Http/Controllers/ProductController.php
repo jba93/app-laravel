@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Http\Requests\StoreUpdateProductRequest;
 use Illuminate\Http\Request;
@@ -111,7 +112,17 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        $product->update($request->all());
+        $data = $request->all();
+
+        if($request->hasFile('image') && $request->image->isValid()){
+            if($product->image && Storage::exists($product->image)){
+                Storage::delete($product->image);
+            }
+
+            $data['image'] = $request->image->store('products');
+        }
+
+        $product->update($data);
 
         return redirect()->route('products.index');
     }
