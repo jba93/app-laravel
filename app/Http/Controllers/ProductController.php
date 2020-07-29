@@ -46,10 +46,15 @@ class ProductController extends Controller
      */
     public function store(StoreUpdateProductRequest $request)
     {
-        dd('ok');
+        $data = $request->only('name', 'description', 'price');
+        Product::create($data);
+
+        return redirect()->route('products.index');
+
+        /*
         if($request->file('photo')->isValid()){
             dd($request->file('photo')->store('products'));
-        }
+        }*/
     }
 
     /**
@@ -86,12 +91,11 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\StoreUpdateProductRequest  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateProductRequest $request, $id)
+    public function update(StoreUpdateProductRequest $request)
     {
-        dd("editando o produto $id");
+        
     }
 
     /**

@@ -25,16 +25,26 @@ class StoreUpdateProductRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'description' => 'nullable|min:3|max:10000',
-            'photo' => 'nullable|image',
+            'description' => 'required|min:5|max:10000',
+            'price' => 'required',
+            'image' => 'nullable|image',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.min' => 'O campo nome precisa ter pelo menos 3 caracteres.'
+            'name.required' => 'O campo Nome é obrigatório.',
+            'name.min' => 'O campo Nome precisa ter pelo menos 3 caracteres.',
+            'name.max' => 'O campo Nome precisa ter no máximo 255 caracteres.',
+
+            'price.required' => 'O campo Preço é obrigatório.',
+
+            'description.required' => 'O campo Descrição é obrigatório.',
+            'description.min' => 'O campo Descrição precisa ter pelo menos 5 caracteres.',
+            'description.max' => 'O campo Descrição precisa ter no máximo 10000 caracteres.',
+
+            'image.image' => 'O arquivo deve ser uma imagem.',
         ];
 
     }
