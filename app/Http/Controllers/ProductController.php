@@ -134,4 +134,16 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
+
+    public function search(Request $request)
+    {
+        $filters = $request->except('_token');
+
+        $products = $this->product->search($request->filter);
+
+        return view('admin.pages.products.index', [
+            'products' => $products,
+            'filters' => $filters,
+            ]);
+    }
 }
