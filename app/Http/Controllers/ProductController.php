@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     protected $request;
+    protected $product;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Product $product)
     {
         $this->request = $request;
+        $this->product = $product;
     }
 
     /**
@@ -22,7 +24,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = $this->product->paginate(15);
         return view('admin.pages.products.index', [
             'products' => $products
             ]);
@@ -47,7 +49,7 @@ class ProductController extends Controller
     public function store(StoreUpdateProductRequest $request)
     {
         $data = $request->only('name', 'description', 'price');
-        Product::create($data);
+        $this->product->create($data);
 
         return redirect()->route('products.index');
 
@@ -65,7 +67,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = $this->product->find($id);
 
         if(!$product){
             return redirect()->back();
@@ -106,6 +108,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return "destroy";
+        $product = $this->product->find($id);
+
+        if(!$product){
+            return redirect()->back();
+        }
+
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }

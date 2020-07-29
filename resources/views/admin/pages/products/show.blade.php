@@ -6,6 +6,12 @@
 
 <h1>Produto {{$product->id}}</h1>
 
+<form action="{{route('products.destroy', $product->id)}}" method="post">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">Excluir</button>
+</form>
+
 <ul>
     <li><strong>Nome:</strong> {{$product->name}}</li>
     <li><strong>Descrição:</strong> {{$product->description}}</li>
