@@ -2,14 +2,29 @@
 
 @section('title', 'Produtos')
 
-<h1>Produtos</h1>
-
-<a href="{{route('products.create')}}">Novo Produto</a>
-
 @section('content')
-    @if (isset($products))
-        @foreach ($products as $product)
-            <p>{{$product}}</p>
-        @endforeach
-    @endif
+    <h1>Produtos</h1>
+    <a href="{{route('products.create')}}" class="btn btn-info">Novo Produto</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th width="100">Ações</th>
+            </tr>        
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+                <tr>
+                    <td>{{$product->name}}</td>
+                    <td>{{$product->price}}</td>
+                    <td><a href="">Detalhes</a></td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    {!! $products->links() !!}
+
 @endsection
