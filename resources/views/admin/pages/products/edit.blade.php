@@ -3,13 +3,28 @@
 @section('title', 'Editar produto')
 
 @section('content')
-    <h1>Editar Produto {{$id}}</h1>
+    <h1>Editar Produto {{$product->id}}</h1>
 
-    <form action="{{route('products.update', $id)}}" method="POST">
+    @include('admin.includes.alerts')
+
+    <form action="{{route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data" class="form">
         @csrf
         @method("PUT")
-        <input type="text" name="name" placeholder="Nome">
-        <input type="text" name="description" placeholder="Descrição">
-        <button type="submit">Editar</button>
+        <div class="form-group">            
+            <input type="text" name="name" placeholder="Nome" value="{{ $product->name }}" class="form-control">
+        </div>
+        <div class="form-group"> 
+            <input type="text" name="description" placeholder="Descrição" value="{{$product->description}}" class="form-control">
+        </div>
+        <div class="form-group"> 
+            <input type="text" name="price" placeholder="Preço" value="{{$product->price}}" class="form-control">
+        </div>
+        <div class="form-group"> 
+            <input type="file" name="image" class="form-control">
+        </div>
+        <div class="form-group"> 
+            <a href="{{route('products.index')}}" class="btn btn-info">Voltar</a>
+            <button type="submit" class="btn btn-success">Editar</button>            
+        </div>  
     </form>
 @endsection

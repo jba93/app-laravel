@@ -19,7 +19,10 @@
                 <tr>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
-                    <td><a href="{{route('products.show', $product->id)}}">Detalhes</a></td>
+                    <td>
+                        <a href="{{route('products.edit', $product->id)}}">Editar</a>
+                        <a href="{{route('products.show', $product->id)}}">Detalhes</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

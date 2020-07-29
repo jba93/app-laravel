@@ -86,7 +86,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.pages.products.edit', compact('id'));
+        $product = $this->product->find($id);
+
+        if(!$product){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.products.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -95,9 +103,17 @@ class ProductController extends Controller
      * @param  App\Http\Requests\StoreUpdateProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateProductRequest $request)
+    public function update(StoreUpdateProductRequest $request, $id)
     {
-        
+        $product = $this->product->find($id);
+
+        if(!$product){
+            return redirect()->back();
+        }
+
+        $product->update($request->all());
+
+        return redirect()->route('products.index');
     }
 
     /**
