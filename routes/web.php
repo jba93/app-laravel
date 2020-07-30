@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::any('products/search', 'ProductController@search')->name('products.search');
 
-Route::resource('products', 'ProductController');
-/*->middleware('auth');*/
+Route::resource('products', 'ProductController')->middleware('auth');
 
 Route::get('/login', function () {
     return 'login';
 })->name('login');
 
+Route::view('/', 'welcome');
 
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
